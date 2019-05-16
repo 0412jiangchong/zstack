@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import org.zstack.sdk.*;
 
-public class DecodeStackTemplateAction extends AbstractAction {
+public class CreateBuildAppAction extends AbstractAction {
 
     private static final HashMap<String, Parameter> parameterMap = new HashMap<>();
 
@@ -12,7 +12,7 @@ public class DecodeStackTemplateAction extends AbstractAction {
 
     public static class Result {
         public ErrorCode error;
-        public org.zstack.sdk.DecodeStackTemplateResult value;
+        public org.zstack.sdk.CreateBuildAppResult value;
 
         public Result throwExceptionIfError() {
             if (error != null) {
@@ -25,20 +25,32 @@ public class DecodeStackTemplateAction extends AbstractAction {
         }
     }
 
-    @Param(required = false, validValues = {"zstack"}, nonempty = false, nullElements = false, emptyString = true, noTrim = false)
-    public java.lang.String type = "zstack";
+    @Param(required = true, maxLength = 255, nonempty = false, nullElements = false, emptyString = false, noTrim = false)
+    public java.lang.String name;
 
-    @Param(required = false, maxLength = 4194304, nonempty = false, nullElements = false, emptyString = true, noTrim = false)
-    public java.lang.String templateContent;
+    @Param(required = false, maxLength = 2048, nonempty = false, nullElements = false, emptyString = true, noTrim = false)
+    public java.lang.String description;
+
+    @Param(required = true, nonempty = false, nullElements = false, emptyString = true, noTrim = false)
+    public java.lang.String buildAppOfferingUuid;
+
+    @Param(required = true, nonempty = false, nullElements = false, emptyString = true, noTrim = false)
+    public java.lang.String buildSystemUuid;
+
+    @Param(required = true, nonempty = false, nullElements = false, emptyString = false, noTrim = false)
+    public java.lang.String dataPath;
+
+    @Param(required = true, nonempty = false, nullElements = false, emptyString = false, noTrim = false)
+    public java.lang.String version;
 
     @Param(required = false, nonempty = false, nullElements = false, emptyString = true, noTrim = false)
-    public java.lang.String uuid;
+    public java.lang.Boolean buildImage;
 
-    @Param(required = false, maxLength = 524288, nonempty = false, nullElements = false, emptyString = true, noTrim = false)
-    public java.lang.String parameters;
+    @Param(required = false)
+    public java.lang.String resourceUuid;
 
-    @Param(required = false, maxLength = 524288, nonempty = false, nullElements = false, emptyString = true, noTrim = false)
-    public java.lang.String preparameters;
+    @Param(required = false, nonempty = false, nullElements = false, emptyString = true, noTrim = false)
+    public java.util.List tagUuids;
 
     @Param(required = false)
     public java.util.List systemTags;
@@ -55,6 +67,12 @@ public class DecodeStackTemplateAction extends AbstractAction {
     @Param(required = false)
     public String accessKeySecret;
 
+    @NonAPIParam
+    public long timeout = -1;
+
+    @NonAPIParam
+    public long pollingInterval = -1;
+
 
     private Result makeResult(ApiResult res) {
         Result ret = new Result();
@@ -63,8 +81,8 @@ public class DecodeStackTemplateAction extends AbstractAction {
             return ret;
         }
         
-        org.zstack.sdk.DecodeStackTemplateResult value = res.getResult(org.zstack.sdk.DecodeStackTemplateResult.class);
-        ret.value = value == null ? new org.zstack.sdk.DecodeStackTemplateResult() : value; 
+        org.zstack.sdk.CreateBuildAppResult value = res.getResult(org.zstack.sdk.CreateBuildAppResult.class);
+        ret.value = value == null ? new org.zstack.sdk.CreateBuildAppResult() : value; 
 
         return ret;
     }
@@ -94,9 +112,9 @@ public class DecodeStackTemplateAction extends AbstractAction {
     protected RestInfo getRestInfo() {
         RestInfo info = new RestInfo();
         info.httpMethod = "POST";
-        info.path = "/cloudformation/stack/preview/resource";
+        info.path = "/appcenter/buildapp";
         info.needSession = true;
-        info.needPoll = false;
+        info.needPoll = true;
         info.parameterName = "params";
         return info;
     }

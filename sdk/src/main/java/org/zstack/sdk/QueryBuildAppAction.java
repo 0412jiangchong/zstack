@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import org.zstack.sdk.*;
 
-public class DecodeStackTemplateAction extends AbstractAction {
+public class QueryBuildAppAction extends QueryAction {
 
     private static final HashMap<String, Parameter> parameterMap = new HashMap<>();
 
@@ -12,7 +12,7 @@ public class DecodeStackTemplateAction extends AbstractAction {
 
     public static class Result {
         public ErrorCode error;
-        public org.zstack.sdk.DecodeStackTemplateResult value;
+        public org.zstack.sdk.QueryBuildAppResult value;
 
         public Result throwExceptionIfError() {
             if (error != null) {
@@ -25,35 +25,6 @@ public class DecodeStackTemplateAction extends AbstractAction {
         }
     }
 
-    @Param(required = false, validValues = {"zstack"}, nonempty = false, nullElements = false, emptyString = true, noTrim = false)
-    public java.lang.String type = "zstack";
-
-    @Param(required = false, maxLength = 4194304, nonempty = false, nullElements = false, emptyString = true, noTrim = false)
-    public java.lang.String templateContent;
-
-    @Param(required = false, nonempty = false, nullElements = false, emptyString = true, noTrim = false)
-    public java.lang.String uuid;
-
-    @Param(required = false, maxLength = 524288, nonempty = false, nullElements = false, emptyString = true, noTrim = false)
-    public java.lang.String parameters;
-
-    @Param(required = false, maxLength = 524288, nonempty = false, nullElements = false, emptyString = true, noTrim = false)
-    public java.lang.String preparameters;
-
-    @Param(required = false)
-    public java.util.List systemTags;
-
-    @Param(required = false)
-    public java.util.List userTags;
-
-    @Param(required = false)
-    public String sessionId;
-
-    @Param(required = false)
-    public String accessKeyId;
-
-    @Param(required = false)
-    public String accessKeySecret;
 
 
     private Result makeResult(ApiResult res) {
@@ -63,8 +34,8 @@ public class DecodeStackTemplateAction extends AbstractAction {
             return ret;
         }
         
-        org.zstack.sdk.DecodeStackTemplateResult value = res.getResult(org.zstack.sdk.DecodeStackTemplateResult.class);
-        ret.value = value == null ? new org.zstack.sdk.DecodeStackTemplateResult() : value; 
+        org.zstack.sdk.QueryBuildAppResult value = res.getResult(org.zstack.sdk.QueryBuildAppResult.class);
+        ret.value = value == null ? new org.zstack.sdk.QueryBuildAppResult() : value; 
 
         return ret;
     }
@@ -93,11 +64,11 @@ public class DecodeStackTemplateAction extends AbstractAction {
 
     protected RestInfo getRestInfo() {
         RestInfo info = new RestInfo();
-        info.httpMethod = "POST";
-        info.path = "/cloudformation/stack/preview/resource";
+        info.httpMethod = "GET";
+        info.path = "/appcenter/buildapp";
         info.needSession = true;
         info.needPoll = false;
-        info.parameterName = "params";
+        info.parameterName = "";
         return info;
     }
 

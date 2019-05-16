@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import org.zstack.sdk.*;
 
-public class DecodeStackTemplateAction extends AbstractAction {
+public class CheckRawAppParametersAction extends AbstractAction {
 
     private static final HashMap<String, Parameter> parameterMap = new HashMap<>();
 
@@ -12,7 +12,7 @@ public class DecodeStackTemplateAction extends AbstractAction {
 
     public static class Result {
         public ErrorCode error;
-        public org.zstack.sdk.DecodeStackTemplateResult value;
+        public org.zstack.sdk.CheckRawAppParametersResult value;
 
         public Result throwExceptionIfError() {
             if (error != null) {
@@ -28,17 +28,8 @@ public class DecodeStackTemplateAction extends AbstractAction {
     @Param(required = false, validValues = {"zstack"}, nonempty = false, nullElements = false, emptyString = true, noTrim = false)
     public java.lang.String type = "zstack";
 
-    @Param(required = false, maxLength = 4194304, nonempty = false, nullElements = false, emptyString = true, noTrim = false)
-    public java.lang.String templateContent;
-
-    @Param(required = false, nonempty = false, nullElements = false, emptyString = true, noTrim = false)
+    @Param(required = true, nonempty = false, nullElements = false, emptyString = true, noTrim = false)
     public java.lang.String uuid;
-
-    @Param(required = false, maxLength = 524288, nonempty = false, nullElements = false, emptyString = true, noTrim = false)
-    public java.lang.String parameters;
-
-    @Param(required = false, maxLength = 524288, nonempty = false, nullElements = false, emptyString = true, noTrim = false)
-    public java.lang.String preparameters;
 
     @Param(required = false)
     public java.util.List systemTags;
@@ -63,8 +54,8 @@ public class DecodeStackTemplateAction extends AbstractAction {
             return ret;
         }
         
-        org.zstack.sdk.DecodeStackTemplateResult value = res.getResult(org.zstack.sdk.DecodeStackTemplateResult.class);
-        ret.value = value == null ? new org.zstack.sdk.DecodeStackTemplateResult() : value; 
+        org.zstack.sdk.CheckRawAppParametersResult value = res.getResult(org.zstack.sdk.CheckRawAppParametersResult.class);
+        ret.value = value == null ? new org.zstack.sdk.CheckRawAppParametersResult() : value; 
 
         return ret;
     }
@@ -94,7 +85,7 @@ public class DecodeStackTemplateAction extends AbstractAction {
     protected RestInfo getRestInfo() {
         RestInfo info = new RestInfo();
         info.httpMethod = "POST";
-        info.path = "/cloudformation/stack/preview/resource";
+        info.path = "/appcenter/rawapp/check";
         info.needSession = true;
         info.needPoll = false;
         info.parameterName = "params";

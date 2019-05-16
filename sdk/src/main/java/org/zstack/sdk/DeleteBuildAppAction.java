@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import org.zstack.sdk.*;
 
-public class DecodeStackTemplateAction extends AbstractAction {
+public class DeleteBuildAppAction extends AbstractAction {
 
     private static final HashMap<String, Parameter> parameterMap = new HashMap<>();
 
@@ -12,7 +12,7 @@ public class DecodeStackTemplateAction extends AbstractAction {
 
     public static class Result {
         public ErrorCode error;
-        public org.zstack.sdk.DecodeStackTemplateResult value;
+        public org.zstack.sdk.DeleteBuildAppResult value;
 
         public Result throwExceptionIfError() {
             if (error != null) {
@@ -25,20 +25,11 @@ public class DecodeStackTemplateAction extends AbstractAction {
         }
     }
 
-    @Param(required = false, validValues = {"zstack"}, nonempty = false, nullElements = false, emptyString = true, noTrim = false)
-    public java.lang.String type = "zstack";
-
-    @Param(required = false, maxLength = 4194304, nonempty = false, nullElements = false, emptyString = true, noTrim = false)
-    public java.lang.String templateContent;
-
-    @Param(required = false, nonempty = false, nullElements = false, emptyString = true, noTrim = false)
+    @Param(required = true, nonempty = false, nullElements = false, emptyString = true, noTrim = false)
     public java.lang.String uuid;
 
-    @Param(required = false, maxLength = 524288, nonempty = false, nullElements = false, emptyString = true, noTrim = false)
-    public java.lang.String parameters;
-
-    @Param(required = false, maxLength = 524288, nonempty = false, nullElements = false, emptyString = true, noTrim = false)
-    public java.lang.String preparameters;
+    @Param(required = false)
+    public java.lang.String deleteMode = "Permissive";
 
     @Param(required = false)
     public java.util.List systemTags;
@@ -55,6 +46,12 @@ public class DecodeStackTemplateAction extends AbstractAction {
     @Param(required = false)
     public String accessKeySecret;
 
+    @NonAPIParam
+    public long timeout = -1;
+
+    @NonAPIParam
+    public long pollingInterval = -1;
+
 
     private Result makeResult(ApiResult res) {
         Result ret = new Result();
@@ -63,8 +60,8 @@ public class DecodeStackTemplateAction extends AbstractAction {
             return ret;
         }
         
-        org.zstack.sdk.DecodeStackTemplateResult value = res.getResult(org.zstack.sdk.DecodeStackTemplateResult.class);
-        ret.value = value == null ? new org.zstack.sdk.DecodeStackTemplateResult() : value; 
+        org.zstack.sdk.DeleteBuildAppResult value = res.getResult(org.zstack.sdk.DeleteBuildAppResult.class);
+        ret.value = value == null ? new org.zstack.sdk.DeleteBuildAppResult() : value; 
 
         return ret;
     }
@@ -93,11 +90,11 @@ public class DecodeStackTemplateAction extends AbstractAction {
 
     protected RestInfo getRestInfo() {
         RestInfo info = new RestInfo();
-        info.httpMethod = "POST";
-        info.path = "/cloudformation/stack/preview/resource";
+        info.httpMethod = "DELETE";
+        info.path = "/appcenter/buildapp/{uuid}";
         info.needSession = true;
-        info.needPoll = false;
-        info.parameterName = "params";
+        info.needPoll = true;
+        info.parameterName = "";
         return info;
     }
 

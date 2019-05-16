@@ -36,4 +36,8 @@ public class ImageSystemTags {
     public static String IMAGE_CREATED_BY_SYSTEM_TOKEN = "CreatedBySystem";
     public static PatternedSystemTag IMAGE_CREATED_BY_SYSTEM =
             new PatternedSystemTag(String.format("%s", IMAGE_CREATED_BY_SYSTEM_TOKEN), ImageVO.class);
+    public static String APPCENTER_RAW_TOKEN = "rawapp";
+    public static PatternedSystemTag APPCENTER_RAW = new PatternedSystemTag(String.format("rawapp::{%s}", APPCENTER_RAW_TOKEN), ImageVO.class);
+
+    public static PatternedSystemTag PACKER_BUILD = new PatternedSystemTag("packer", ImageVO.class);
 }
