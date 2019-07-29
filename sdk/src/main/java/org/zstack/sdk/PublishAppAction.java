@@ -26,7 +26,7 @@ public class PublishAppAction extends AbstractAction {
     }
 
     @Param(required = true, nonempty = false, nullElements = false, emptyString = true, noTrim = false)
-    public java.lang.String rawAppUuid;
+    public java.lang.String buildAppUuid;
 
     @Param(required = true, maxLength = 255, nonempty = false, nullElements = false, emptyString = false, noTrim = false)
     public java.lang.String name;

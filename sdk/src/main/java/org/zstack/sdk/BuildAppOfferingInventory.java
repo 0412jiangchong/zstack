@@ -52,14 +52,6 @@ public class BuildAppOfferingInventory  {
         return this.appGroup;
     }
 
-    public java.lang.String versionFormat;
-    public void setVersionFormat(java.lang.String versionFormat) {
-        this.versionFormat = versionFormat;
-    }
-    public java.lang.String getVersionFormat() {
-        return this.versionFormat;
-    }
-
     public java.lang.String type;
     public void setType(java.lang.String type) {
         this.type = type;

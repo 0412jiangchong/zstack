@@ -44,12 +44,12 @@ public class PublishAppInventory  {
         return this.preParams;
     }
 
-    public java.lang.String rawAppUuid;
-    public void setRawAppUuid(java.lang.String rawAppUuid) {
-        this.rawAppUuid = rawAppUuid;
+    public java.lang.String buildAppUuid;
+    public void setBuildAppUuid(java.lang.String buildAppUuid) {
+        this.buildAppUuid = buildAppUuid;
     }
-    public java.lang.String getRawAppUuid() {
-        return this.rawAppUuid;
+    public java.lang.String getBuildAppUuid() {
+        return this.buildAppUuid;
     }
 
     public java.lang.String type;

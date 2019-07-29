@@ -1,13 +1,13 @@
 package org.zstack.sdk;
 
-import org.zstack.sdk.RawApplicationInventory;
+import org.zstack.sdk.BuildApplicationInventory;
 
 public class AddBuildAppResult {
-    public RawApplicationInventory inventory;
-    public void setInventory(RawApplicationInventory inventory) {
+    public BuildApplicationInventory inventory;
+    public void setInventory(BuildApplicationInventory inventory) {
         this.inventory = inventory;
     }
-    public RawApplicationInventory getInventory() {
+    public BuildApplicationInventory getInventory() {
         return this.inventory;
     }
 

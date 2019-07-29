@@ -34,8 +34,17 @@ public class AddBuildAppAction extends AbstractAction {
     @Param(required = true, maxLength = 1024, nonempty = false, nullElements = false, emptyString = true, noTrim = false)
     public java.lang.String url;
 
+    @Param(required = true, nonempty = false, nullElements = false, emptyString = true, noTrim = false)
+    public java.lang.String buildSystemUuid;
+
     @Param(required = false, validValues = {"zstack"}, nonempty = false, nullElements = false, emptyString = true, noTrim = false)
     public java.lang.String type;
+
+    @Param(required = true, nonempty = false, nullElements = false, emptyString = true, noTrim = false)
+    public java.lang.String backupStorageUuid;
+
+    @Param(required = false, nonempty = false, nullElements = false, emptyString = true, noTrim = false)
+    public java.lang.Boolean fromBuild;
 
     @Param(required = false)
     public java.lang.String resourceUuid;
@@ -103,7 +112,7 @@ public class AddBuildAppAction extends AbstractAction {
     protected RestInfo getRestInfo() {
         RestInfo info = new RestInfo();
         info.httpMethod = "POST";
-        info.path = "/appcenter/rawapp";
+        info.path = "/appcenter/buildapp/add";
         info.needSession = true;
         info.needPoll = true;
         info.parameterName = "params";

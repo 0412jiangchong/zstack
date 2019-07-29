@@ -28,20 +28,12 @@ public class BuildApplicationInventory  {
         return this.description;
     }
 
-    public java.lang.String buildAppOfferingUuid;
-    public void setBuildAppOfferingUuid(java.lang.String buildAppOfferingUuid) {
-        this.buildAppOfferingUuid = buildAppOfferingUuid;
+    public java.lang.String buildSystemUuid;
+    public void setBuildSystemUuid(java.lang.String buildSystemUuid) {
+        this.buildSystemUuid = buildSystemUuid;
     }
-    public java.lang.String getBuildAppOfferingUuid() {
-        return this.buildAppOfferingUuid;
-    }
-
-    public java.lang.String buildSystemingUuid;
-    public void setBuildSystemingUuid(java.lang.String buildSystemingUuid) {
-        this.buildSystemingUuid = buildSystemingUuid;
-    }
-    public java.lang.String getBuildSystemingUuid() {
-        return this.buildSystemingUuid;
+    public java.lang.String getBuildSystemUuid() {
+        return this.buildSystemUuid;
     }
 
     public java.lang.String templateContent;
@@ -60,6 +52,22 @@ public class BuildApplicationInventory  {
         return this.installPath;
     }
 
+    public java.lang.String licenseInfo;
+    public void setLicenseInfo(java.lang.String licenseInfo) {
+        this.licenseInfo = licenseInfo;
+    }
+    public java.lang.String getLicenseInfo() {
+        return this.licenseInfo;
+    }
+
+    public java.lang.String authorInfo;
+    public void setAuthorInfo(java.lang.String authorInfo) {
+        this.authorInfo = authorInfo;
+    }
+    public java.lang.String getAuthorInfo() {
+        return this.authorInfo;
+    }
+
     public java.lang.String appMetaData;
     public void setAppMetaData(java.lang.String appMetaData) {
         this.appMetaData = appMetaData;
@@ -74,6 +82,14 @@ public class BuildApplicationInventory  {
     }
     public java.lang.String getImageInfo() {
         return this.imageInfo;
+    }
+
+    public java.lang.String appId;
+    public void setAppId(java.lang.String appId) {
+        this.appId = appId;
+    }
+    public java.lang.String getAppId() {
+        return this.appId;
     }
 
     public java.lang.String version;

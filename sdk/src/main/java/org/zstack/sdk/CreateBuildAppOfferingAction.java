@@ -43,9 +43,6 @@ public class CreateBuildAppOfferingAction extends AbstractAction {
     @Param(required = false, validValues = {"zstack"}, nonempty = false, nullElements = false, emptyString = true, noTrim = false)
     public java.lang.String type;
 
-    @Param(required = false, validRegexValues = "^(x\\.){0,4}x$", nonempty = false, nullElements = false, emptyString = true, noTrim = false)
-    public java.lang.String versionFormat;
-
     @Param(required = false)
     public java.lang.String resourceUuid;
 

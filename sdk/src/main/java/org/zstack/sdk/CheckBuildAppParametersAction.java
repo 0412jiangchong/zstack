@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import org.zstack.sdk.*;
 
-public class UpdateRawAppAction extends AbstractAction {
+public class CheckBuildAppParametersAction extends AbstractAction {
 
     private static final HashMap<String, Parameter> parameterMap = new HashMap<>();
 
@@ -12,7 +12,7 @@ public class UpdateRawAppAction extends AbstractAction {
 
     public static class Result {
         public ErrorCode error;
-        public org.zstack.sdk.UpdateRawAppResult value;
+        public org.zstack.sdk.CheckBuildAppParametersResult value;
 
         public Result throwExceptionIfError() {
             if (error != null) {
@@ -25,14 +25,11 @@ public class UpdateRawAppAction extends AbstractAction {
         }
     }
 
+    @Param(required = false, validValues = {"zstack"}, nonempty = false, nullElements = false, emptyString = true, noTrim = false)
+    public java.lang.String type = "zstack";
+
     @Param(required = true, nonempty = false, nullElements = false, emptyString = true, noTrim = false)
     public java.lang.String uuid;
-
-    @Param(required = false, maxLength = 255, nonempty = false, nullElements = false, emptyString = true, noTrim = false)
-    public java.lang.String name;
-
-    @Param(required = false, maxLength = 2048, nonempty = false, nullElements = false, emptyString = true, noTrim = false)
-    public java.lang.String description;
 
     @Param(required = false)
     public java.util.List systemTags;
@@ -49,12 +46,6 @@ public class UpdateRawAppAction extends AbstractAction {
     @Param(required = false)
     public String accessKeySecret;
 
-    @NonAPIParam
-    public long timeout = -1;
-
-    @NonAPIParam
-    public long pollingInterval = -1;
-
 
     private Result makeResult(ApiResult res) {
         Result ret = new Result();
@@ -63,8 +54,8 @@ public class UpdateRawAppAction extends AbstractAction {
             return ret;
         }
         
-        org.zstack.sdk.UpdateRawAppResult value = res.getResult(org.zstack.sdk.UpdateRawAppResult.class);
-        ret.value = value == null ? new org.zstack.sdk.UpdateRawAppResult() : value; 
+        org.zstack.sdk.CheckBuildAppParametersResult value = res.getResult(org.zstack.sdk.CheckBuildAppParametersResult.class);
+        ret.value = value == null ? new org.zstack.sdk.CheckBuildAppParametersResult() : value; 
 
         return ret;
     }
@@ -93,11 +84,11 @@ public class UpdateRawAppAction extends AbstractAction {
 
     protected RestInfo getRestInfo() {
         RestInfo info = new RestInfo();
-        info.httpMethod = "PUT";
-        info.path = "/appcenter/rawapp/{uuid}/actions";
+        info.httpMethod = "POST";
+        info.path = "/appcenter/buildapp/check";
         info.needSession = true;
-        info.needPoll = true;
-        info.parameterName = "updateRawApp";
+        info.needPoll = false;
+        info.parameterName = "params";
         return info;
     }
 

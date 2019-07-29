@@ -2,7 +2,7 @@ package org.zstack.sdk;
 
 
 
-public class CheckRawAppParametersResult {
+public class CheckBuildAppParametersResult {
     public java.util.List parameters;
     public void setParameters(java.util.List parameters) {
         this.parameters = parameters;
